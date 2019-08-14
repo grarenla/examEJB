@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EMI</title>
+</head>
+<body>
+<div>
+    <div>
+        <label>Loan amount</label><input type="text" id="loan">
+    </div>
+    <div>
+        <label>Rate Of Interest</label><input type="text" id="rate">
+    </div>
+    <div>
+        <label>Tenure</label><input type="text" id="tenure">
+    </div>
+
+    <button type="button" id="submit" onclick="post()">Submit</button>
+</div>
+<div>
+    <h3>Result: <span id="result"></span></h3>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+    function post() {
+        var data = {
+            "loan": document.getElementById("loan").value,
+            "rateOfInterest": document.getElementById("rate").value,
+            "tenure": document.getElementById("tenure").value
+        };
+        axios.post('/emi', data)
+            .then(function (res) {
+                document.getElementById("result").innerText = res.data.result;
+                console.log(res);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    }
+
+</script>
+</body>
+</html>
